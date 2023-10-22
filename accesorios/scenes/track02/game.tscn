@@ -1,0 +1,56 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://accesorios/scenes/cars/it4/car.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://accesorios/scenes/track02/track02_06.tscn" type="PackedScene" id=3]
+[ext_resource path="res://accesorios/sprites/tl/y.png" type="Texture" id=4]
+[ext_resource path="res://accesorios/sprites/tl/r.png" type="Texture" id=5]
+[ext_resource path="res://accesorios/sprites/tl/g.png" type="Texture" id=6]
+[ext_resource path="res://accesorios/scenes/track02/game.gd" type="Script" id=7]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 2 )
+uv1_scale = Vector3( 1000, 1, 1000 )
+uv1_triplanar = true
+
+[sub_resource type="BoxShape" id=3]
+
+[node name="game" type="Spatial"]
+script = ExtResource( 7 )
+
+[node name="KinematicBody" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.604, 9.549 )
+
+[node name="TLight" type="Node" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="TLight"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41.0648, 3.53305, 0 )
+texture = ExtResource( 5 )
+
+[node name="Sprite3D2" type="Sprite3D" parent="TLight"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41.0648, 3.53305, 0 )
+visible = false
+texture = ExtResource( 4 )
+
+[node name="Sprite3D3" type="Sprite3D" parent="TLight"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41.0648, 3.53305, 0 )
+visible = false
+texture = ExtResource( 6 )
+
+[node name="node_floor" type="Node" parent="."]
+
+[node name="floor" type="StaticBody" parent="node_floor"]
+
+[node name="MeshInstance" type="MeshInstance" parent="node_floor/floor"]
+transform = Transform( 1000, 0, 0, 0, 0.001, 0, 0, 0, 1000, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="node_floor/floor"]
+transform = Transform( 1000, 0, 0, 0, 0.001, 0, 0, 0, 1000, 0, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="track02_06" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0 )
